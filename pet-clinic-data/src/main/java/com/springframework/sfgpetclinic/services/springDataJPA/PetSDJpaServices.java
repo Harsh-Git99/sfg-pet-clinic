@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-@Profile("springbootjpa")
+@Profile("springdatajpa")
 public class PetSDJpaServices implements PetService {
 
     private final PetRepository petRepository;
