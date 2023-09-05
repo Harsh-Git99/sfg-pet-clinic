@@ -8,16 +8,16 @@ import com.springframework.sfgpetclinic.services.PetTypeService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
 @Profile({"default", "map"})
-public class OwnerServiceMap extends  AbstractMapService<Owner,Long> implements OwnerService {
+public class OwnerMapService extends AbstractMapService<Owner,Long> implements OwnerService {
 
     private final PetTypeService petTypeService;
     private final PetService petService;
-
-    public OwnerServiceMap(PetTypeService petTypeService, PetService petService) {
+    public OwnerMapService(PetTypeService petTypeService, PetService petService) {
         this.petTypeService = petTypeService;
         this.petService = petService;
     }
@@ -28,13 +28,8 @@ public class OwnerServiceMap extends  AbstractMapService<Owner,Long> implements 
     }
 
     @Override
-    public void deleteById(Long id) {
-        super.deleteById(id);
-    }
-
-    @Override
-    public void delete(Owner object) {
-        super.delete(object);
+    public Owner findById(Long id) {
+        return super.findById(id);
     }
 
     @Override
@@ -56,18 +51,31 @@ public class OwnerServiceMap extends  AbstractMapService<Owner,Long> implements 
                     }
                 });
             }
-            return super.save( object);
-        }else return null;
-
+            return super.save(object);
+        }else {
+            return null;
+        }
     }
 
     @Override
-    public Owner findById(Long id) {
-        return super.findById(id);
+    public void deleteById(Long id) {
+        super.deleteById(id);
     }
+
+    @Override
+    public void delete(Owner object) {
+        super.delete(object);
+    }
+
+
+
 
     @Override
     public Owner findByLastName(String lastName) {
-        return null;
+      return  this.findAll()
+              .stream()
+              .filter(owner -> owner.getLastName().equals(lastName))
+              .findFirst()
+              .orElse(null );
     }
 }
