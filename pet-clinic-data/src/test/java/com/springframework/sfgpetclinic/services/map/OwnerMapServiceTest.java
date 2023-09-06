@@ -23,15 +23,13 @@ class OwnerMapServiceTest {
     @Test
     void findAll() {
         Set<Owner> ownerSet = ownerMapService.findAll();
-
         assertEquals(1,ownerSet.size());
     }
 
     @Test
-    void FindById() {
+    void findById() {
         Owner owner = ownerMapService.findById(ownerId);
-
-        assertEquals(1,owner.getId());
+        assertEquals(ownerId,owner.getId());
     }
 
     @Test
@@ -39,7 +37,7 @@ class OwnerMapServiceTest {
         Long id = 2L;
         Owner owner2 = Owner.builder().id(id).build();
 
-        Owner saveOwner = ownerMapService.save(owner2);
+         ownerMapService.save(owner2);
 
         assertEquals(id,owner2.getId());
     }
@@ -82,56 +80,4 @@ class OwnerMapServiceTest {
         assertNull(smith);
 
     }
-
-
-//    @Test
-//    void findAll() {
-//        Set<Owner> ownerSet = ownerMapService.findAll();
-//
-//        assertEquals(1,ownerSet.size());
-//
-//    }
-
-//    @Test
-//    void saveExistingId() {
-//        Long id = 2L;
-//        Owner owner2 = Owner.builder().id(id).build();
-//        Owner savedOwner = ownerMapService.save(owner2);
-//
-//        assertEquals(id,savedOwner.getId());
-//    }
-//
-//    @Test
-//    void saveNoId(){
-//        Owner savedOwner = ownerMapService.save(Owner.builder().build());
-//
-//        assertNotNull(savedOwner);
-//        assertNotNull(savedOwner.getId());
-//    }
-//
-//    @Test
-//    void findById() {
-//        Owner owner = ownerMapService.findById(ownerId);
-//        assertEquals(ownerId,owner.getId());
-//    }
-//
-//    @Test
-//    void deleteById() {
-//        ownerMapService.deleteById(ownerId);
-//        assertEquals(0,ownerMapService.findAll().size());
-//    }
-//
-//    @Test
-//    void delete() {
-//        ownerMapService.delete(ownerMapService.findById(ownerId));
-//        assertEquals(0,ownerMapService.findAll().size());
-//    }
-//
-//    @Test
-//    void findByLastName() {
-//        Owner smith = ownerMapService.findByLastName(lastName);
-//        assertNotNull(smith);
-//        assertEquals(ownerId,smith.getId());
-//
-//    }
 }

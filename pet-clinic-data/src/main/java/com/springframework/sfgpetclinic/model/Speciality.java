@@ -8,11 +8,17 @@ import lombok.*;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
 @Entity
 @Table(name="specialities")
 public class Speciality extends BaseEntity{
+
+    @Builder
+    public Speciality(Long id, String description) {
+        super(id);
+        this.description = description;
+    }
+
 
     @Column(name = "description")
     private String description;
